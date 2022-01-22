@@ -1,0 +1,16 @@
+{
+  "name": "lab01_1009177727_comp3133",
+  "version": "1.0.0",
+  "description": "Read the given CSV file using stream or fs",
+  "main": "index.js",
+  "dependencies": {
+    "csv-parser": "^3.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Avery Cieszynski",
+  "license": "ISC"
+}
