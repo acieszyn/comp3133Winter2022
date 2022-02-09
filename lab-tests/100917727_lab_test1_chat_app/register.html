@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Register</title>
+        <style>
+            #errfield {
+                color:red;
+            }
+        </style>
+    </head>
+    <body>
+        <form id="form">
+            Username<br /><input id="uname" /><br />
+            First Name<br /><input id="fname" /><br />
+            Last Name<br /><input id="lname" /><br />
+            Password<br /><input type="password" id="pword" /><button>Register</button> 
+        </form>
+        <div id="errfield"></div>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+
+            var form      = document.getElementById('form');
+            var username  = document.getElementById('uname');
+            var firstname = document.getElementById('fname');
+            var lastname  = document.getElementById('lname');
+            var password  = document.getElementById('pword');
+            var errfield  = document.getElementById('errfield');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                errfield.textContent = '';
+                if (username.value && password.value) {
+                    userObj = {
+                        uname: username.value,
+                        fname: firstname.value,
+                        lname: lastname.value,
+                        pword: password.value
+                    };
+                    socket.emit('add user', userObj);
+                } else { errfield.textContent = 'Please provide a username and password'; }
+            });
+
+            socket.on('user exists', function() {
+                errfield.textContent = 'That username has already been taken';
+            });
+
+            socket.on('added user', function() {
+                window.alert('User successfully registered.\nRedirecting to the login page.');
+                window.location.replace("/"); 
+            })
+        </script>
+    </body>
+</html>
