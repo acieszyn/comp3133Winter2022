@@ -1,9 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const schema = require('./schema');
-const bodyParser = require('body-parser');
-const cors = require('cors');
 const dotenv = require('dotenv');
+const expressJwt = require('express-jwt');
 
 const { ApolloServer } = require('apollo-server-express');
 
@@ -22,13 +21,21 @@ connect.then((db) => {
 const server = new ApolloServer({
     typeDefs: schema.typeDefs,
     resolvers: schema.resolvers,
+    context: ({ req }) => {
+        const user = req.user || '';
+        return { user };
+    },
 });
 
 const app = express();
 
-app.use(bodyParser.json());
-
-app.use('*', cors());
+app.use(
+    expressJwt({
+        secret: 'shhhhh',
+        algorithms: ['HS256'],
+        credentialsRequired: false,
+    })
+);
 
 server.applyMiddleware({ app, });
 

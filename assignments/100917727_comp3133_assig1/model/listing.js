@@ -1,21 +1,33 @@
 const mongoose = require('mongoose');
 
-const userSchema = mongoose.Schema({
-    username: {
+const listingSchema = mongoose.Schema({
+    listing_id: {
         type: String,
         required: true,
         unique: true,
     },
-    firstname: {
+    listing_title: {
         type: String,
         required: true,
     },
-    lastname: {
+    description: {
         type: String,
         required: true,
     },
-    password: {
+    street: {
         type: String,
+        required: true,
+    },
+    city: {
+        type: String,
+        required: true,
+    },
+    postal_code: {
+        type: String,
+        required: true,
+    },
+    price: {
+        type: Number,
         required: true,
     },
     email: {
@@ -23,12 +35,11 @@ const userSchema = mongoose.Schema({
         required: true,
         match: [ /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email address' ],
     },
-    type: {
+    username: {
         type: String,
         required: true,
-        enum: [ 'customer', 'admin' ],
     },
-}, { collection: Users });
+}, { collection: Listings });
 
-var Users = mongoose.model('User', userSchema);
-module.exports = { Users, userSchema, };
+var Listings = mongoose.model('Listing', listingSchema);
+module.exports = { Listings, listingSchema, };
