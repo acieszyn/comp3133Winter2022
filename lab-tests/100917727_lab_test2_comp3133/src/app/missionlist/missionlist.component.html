@@ -1,0 +1,9 @@
+<h1>SpaceX Mission Launch List</h1>
+<div *ngFor="let mission of missionList" (click)="showDetails(mission)">
+    <img src="{{ mission.links.mission_patch_small }}">
+    <h2>{{ mission.mission_name }}</h2>
+    <i>{{ mission.launch_year }}</i>
+    <p>{{ mission.details }}</p>
+    <app-missiondetails *ngIf="currentMission == mission" [missionName]="mission.mission_name" [launchYear]="mission.launch_year" [rocketName]="mission.rocket.rocket_name" [rocketType]="mission.rocket.rocket_type" [launchSite]="mission.launch_site.site_name"></app-missiondetails>
+</div>
+
