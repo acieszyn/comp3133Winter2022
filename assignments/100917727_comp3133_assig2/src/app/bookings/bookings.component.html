@@ -1,0 +1,13 @@
+<div *ngIf="!token; else elseBlock">
+    <p>Please log in to view bookings</p>
+</div>
+<ng-template #elseBlock><ul>
+    <li *ngFor="let booking of bookings | async">
+        <ul>
+            <li>{{booking.booking_id}}</li>
+            <li>{{booking.listing_id}}</li>
+            <li>{{booking.booking_start}}</li>
+            <li>{{booking.booking_end}}</li>
+        </ul>
+    </li>
+</ul></ng-template>
