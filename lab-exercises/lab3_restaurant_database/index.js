@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var express = require("express");
 var url = require("url");
-var db = mongoose.connect("mongodb+srv://guest:readonly123@cluster0.c5llp.mongodb.net/lab3_restaurant_database?retryWrites=true&w=majority");
+var db = mongoose.connect("");
 var restaurantSchema = require("./schema").RestaurantSchema;
 var Restaurants = mongoose.model("Restaurants", restaurantSchema);
 
